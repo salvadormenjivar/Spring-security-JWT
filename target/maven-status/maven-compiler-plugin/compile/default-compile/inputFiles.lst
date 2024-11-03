@@ -1,0 +1,6 @@
+/home/salvador/SpringWorkspace/sprinboot-crud/src/main/java/com/salvador/app/sprinboot_crud/SprinbootCrudApplication.java
+/home/salvador/SpringWorkspace/sprinboot-crud/src/main/java/com/salvador/app/sprinboot_crud/controllers/ProductController.java
+/home/salvador/SpringWorkspace/sprinboot-crud/src/main/java/com/salvador/app/sprinboot_crud/entities/Product.java
+/home/salvador/SpringWorkspace/sprinboot-crud/src/main/java/com/salvador/app/sprinboot_crud/repositories/ProductRepository.java
+/home/salvador/SpringWorkspace/sprinboot-crud/src/main/java/com/salvador/app/sprinboot_crud/services/ProductService.java
+/home/salvador/SpringWorkspace/sprinboot-crud/src/main/java/com/salvador/app/sprinboot_crud/services/ProductServiceImpl.java
