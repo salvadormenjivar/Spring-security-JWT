@@ -14,12 +14,12 @@ import com.salvador.app.sprinboot_crud.entities.User;
 import com.salvador.app.sprinboot_crud.repositories.RoleRepository;
 import com.salvador.app.sprinboot_crud.repositories.UserRepository;
 
+
 @Service
 public class UserServiceImpl implements UserService{
 
-
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -30,33 +30,31 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional(readOnly = true)
     public List<User> findAll() {
-        return (List<User>) userRepository.findAll();
+        return (List<User>) repository.findAll();
     }
 
     @Override
     @Transactional
     public User save(User user) {
-        //Agregamos el rol usuario a todos
+
         Optional<Role> optionalRoleUser = roleRepository.findByName("ROLE_USER");
         List<Role> roles = new ArrayList<>();
-    
-        //optionalRole.ifPresent(role -> roles.add(role));
-        //La linea anterior es equivalente a la siguiente:
+
         optionalRoleUser.ifPresent(roles::add);
 
-        //Si el objeto recibido por parametro es admin le agregamos el rol
-        if(user.isAdmin()){
-            Optional<Role> optionRoleAdmin = roleRepository.findByName("ROLE_ADMIN");
-            optionRoleAdmin.ifPresent(roles::add);
+        if (user.isAdmin()) {
+            Optional<Role> optionalRoleAdmin = roleRepository.findByName("ROLE_ADMIN");
+            optionalRoleAdmin.ifPresent(roles::add);
         }
-        //Seteamos los roles al usuario
+
         user.setRoles(roles);
-        String passwordCodificado = passwordEncoder.encode(user.getPassword());
-        user.setPassword(passwordCodificado);
-            
-        return userRepository.save(user);
-       
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return repository.save(user);
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return repository.existsByUsername(username);
     }
     
-
 }
